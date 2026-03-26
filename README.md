@@ -61,7 +61,8 @@ Chrome extensions work on Edge with zero changes. The Edge store is **free to pu
 3. Click the 🛡 extension icon in Chrome → paste your key → **Save**
 
 > **Free tier limits:** 4 lookups/minute · 500 lookups/day — plenty for personal use.
-> **Premium limits:** A LOT MORE lol
+> 
+> **Premium limits:** A LOT MORE lol.
 ---
 
 
