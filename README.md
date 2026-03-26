@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="icons/icon128.png" width="80" height="80" alt="Extension icon"/>
+<img src="vt-extension/icons/icon128.png" width="80" height="80" alt="Extension icon"/>
 
 # 🛡️ Domain Reputation Check
 
@@ -32,7 +32,7 @@ The extension only checks each domain **once per tab session** — no spam, no s
 
 | Clean | Suspicious | Malicious |
 |-------|-----------|-----------|
-| ![Clean](https://via.placeholder.com/280x120/0d1f14/52e07c?text=0%2F89+%E2%9C%93+CLEAN) | ![Suspicious](https://via.placeholder.com/280x120/1e1500/ffcc00?text=2%2F80+%E2%9A%A0+SUSPICIOUS) | ![Malicious](https://via.placeholder.com/280x120/1a0505/ff4d4d?text=12%2F76+%E2%9C%95+MALICIOUS) |
+| ![Clean](assets/clean/280x120/0d1f14/52e07c?text=0%2F89+%E2%9C%93+CLEAN) | ![Suspicious](https://via.placeholder.com/280x120/1e1500/ffcc00?text=2%2F80+%E2%9A%A0+SUSPICIOUS) | ![Malicious](https://via.placeholder.com/280x120/1a0505/ff4d4d?text=12%2F76+%E2%9C%95+MALICIOUS) |
 
 ---
 
