@@ -32,7 +32,7 @@ The extension only checks each domain **once per tab session** — no spam, no s
 
 | Clean | Suspicious | Malicious |
 |-------|-----------|-----------|
-| ![Clean](assets/clean/280x120/0d1f14/52e07c?text=0%2F89+%E2%9C%93+CLEAN) | ![Suspicious](https://via.placeholder.com/280x120/1e1500/ffcc00?text=2%2F80+%E2%9A%A0+SUSPICIOUS) | ![Malicious](https://via.placeholder.com/280x120/1a0505/ff4d4d?text=12%2F76+%E2%9C%95+MALICIOUS) |
+| ![Clean](assets/clean.png) | ![Suspicious](assets/suspicious.png) | ![Malicious](assets/malicious.png) |
 
 ---
 
@@ -61,48 +61,9 @@ Chrome extensions work on Edge with zero changes. The Edge store is **free to pu
 3. Click the 🛡 extension icon in Chrome → paste your key → **Save**
 
 > **Free tier limits:** 4 lookups/minute · 500 lookups/day — plenty for personal use.
-
+> **Premium limits:** A LOT MORE lol
 ---
 
-## How it works
-
-```
-User visits new domain
-        │
-        ▼
-background.js (service worker)
-  ├─ Checks if domain was already scanned this tab session
-  ├─ Reads API key from chrome.storage.sync
-  ├─ Calls VirusTotal API v3 → /domains/{hostname}
-  └─ Sends result to content script via chrome.runtime.sendMessage
-        │
-        ▼
-content.js (injected into every page)
-  └─ Injects styled overlay into the DOM
-       ├─ Green  → 0 malicious detections
-       ├─ Yellow → 1–2 malicious or 3+ suspicious
-       ├─ Red    → 3+ malicious detections
-       └─ Gray   → no data / unrated domain
-```
-
----
-
-## File structure
-
-```
-domain-reputation-extension/
-├── manifest.json       # Extension config (Manifest V3)
-├── background.js       # Service worker — API calls & domain tracking
-├── content.js          # Injects the overlay UI into web pages
-├── popup.html          # Settings page (API key input)
-├── popup.js            # Saves/loads API key via chrome.storage.sync
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
-```
-
----
 
 ## Permissions explained
 
@@ -124,20 +85,6 @@ No browsing history is stored. No data is sent anywhere except VirusTotal's publ
 - Domain names are sent to VirusTotal's API to retrieve public threat data — the same data available on their website
 - No analytics, no tracking, no ads
 
----
-
-## Publishing to the Chrome Web Store
-
-If you want to publish this publicly:
-
-1. Pay the one-time **$5 developer registration fee** at the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
-2. Prepare a 128×128 icon, at least one screenshot (1280×800), and a privacy policy
-3. Zip the extension folder and upload it
-4. Fill in the store listing and submit for review (usually a few days)
-
-Alternatively, publish for **free** on the [Microsoft Edge Add-ons Store](https://partner.microsoft.com/en-us/dashboard/microsoftedge/overview).
-
----
 
 ## Contributing
 
@@ -153,7 +100,27 @@ Pull requests are welcome! Some ideas for improvements:
 
 ## License
 
-MIT — do whatever you want with it.
+The MIT License (MIT)
+
+Copyright (c) 2011-2026 The Bootstrap Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 ---
 
