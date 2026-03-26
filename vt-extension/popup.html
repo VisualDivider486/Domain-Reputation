@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Reputation Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      background: #0e1117;
+      color: #d0d8f0;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      padding: 0;
+    }
+
+    .header {
+      background: #141824;
+      border-bottom: 1px solid #1f2740;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .shield {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #1a3a5c, #0d2238);
+      border: 1px solid #2a4870;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    .header-text h1 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e8eeff;
+      letter-spacing: 0.02em;
+    }
+
+    .header-text p {
+      font-size: 10px;
+      color: #5a6a99;
+      margin-top: 1px;
+    }
+
+    .body {
+      padding: 16px;
+    }
+
+    .label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5a6a99;
+      margin-bottom: 6px;
+    }
+
+    .input-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      background: #141824;
+      border: 1px solid #1f2740;
+      border-radius: 6px;
+      color: #d0d8f0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      padding: 8px 36px 8px 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #3a5cbf;
+    }
+
+    .toggle-vis {
+      position: absolute;
+      right: 8px; top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5a6a99;
+      font-size: 14px;
+      padding: 2px;
+      transition: color 0.2s;
+    }
+    .toggle-vis:hover { color: #9aabdf; }
+
+    .btn-save {
+      width: 100%;
+      background: #1a3a5c;
+      border: 1px solid #2a5080;
+      border-radius: 6px;
+      color: #7ab8f5;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 9px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-save:hover { background: #1f4a78; border-color: #3a6aaa; }
+    .btn-save:active { background: #152e48; }
+
+    .status {
+      margin-top: 9px;
+      font-size: 11px;
+      min-height: 16px;
+      text-align: center;
+      transition: opacity 0.3s;
+    }
+    .status.ok { color: #52e07c; }
+    .status.err { color: #ff6b6b; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #1a2035;
+      margin: 14px 0;
+    }
+
+    .hint {
+      font-size: 10.5px;
+      color: #3d4d70;
+      line-height: 1.6;
+    }
+
+    .hint a {
+      color: #4a7abf;
+      text-decoration: none;
+    }
+    .hint a:hover { text-decoration: underline; }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #3d4d70;
+      margin-top: 12px;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #3d4d70;
+    }
+    .status-dot.active { background: #52e07c; box-shadow: 0 0 5px #52e07c; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="shield">🛡</div>
+    <div class="header-text">
+      <h1>Domain Reputation</h1>
+      <p>Powered by VirusTotal</p>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="label">VirusTotal API Key</div>
+    <div class="input-wrap">
+      <input type="password" id="apiKey" placeholder="Paste your API key here…" autocomplete="off" />
+      <button class="toggle-vis" id="toggleVis" title="Show/hide key">👁</button>
+    </div>
+
+    <button class="btn-save" id="saveBtn">Save API Key</button>
+    <div class="status" id="statusMsg"></div>
+
+    <hr class="divider">
+
+    <div class="hint">
+      Get a free API key at <a href="https://www.virustotal.com" target="_blank">virustotal.com</a> →
+      Sign in → Profile → API Key.<br><br>
+      The free tier allows <strong>4 lookups/min</strong> and <strong>500/day</strong>.
+    </div>
+
+    <div class="status-row">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">No API key configured</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
